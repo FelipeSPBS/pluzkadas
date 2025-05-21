@@ -1,45 +1,45 @@
 # API e configurações
-APIkey = "7580964496:AAH94KR9R9JFF5ytmYRBW1_YAynkbEo3d-s"  #BOT DO VINI
-
+# APIkey = "7582587778:AAHgg39KVTyHQjcYMWph97tEOYt1O6_ammo"  
+APIkey = "7422761989:AAEp6XeZuT35onXt2YIw_FGfwiap_I3BFyo"
 # APIkey = "7881603922:AAEkNkwFBxxsiXdLpxO_0IX_2os9TZUbRNI"
 
 # APIkey = "7953453940:AAF3L0qnqdxkcblik9ieX1HZROAoT2-Zrj0"
-PUSHINPAY_TOKEN = "15631|x9MbPrOdclsybt6YyCxFN1KclfUiUsFandw3IyQT96988558" # PUSHIN
-groupId = "-1002371382646"
-
-# PUSHINPAY_TOKEN = 19379|x7fq40TUEzriQjehHdEztSGDLjAguTW1XxXXLaa1d6eaac21
-# 15631|x9MbPrOdclsybt6YyCxFN1KclfUiUsFandw3IyQT96988558
-
-plano1 = {"name": "⭐ VIP - Acesso Vitalício ⭐", "length": 10, "price": 1990}  
-plano2 = {"name": "⭐ VIP + 1 Recompensa ⭐", "length": 10, "price": 2490}  
-plano3 = {"name": "⭐ VIP + 2 Benefícios ⭐", "length": 60, "price": 2990}  
-plano4 = {"name": "⭐ Plano Ultra+ ⭐", "length": 90, "price": 3990}  
-plano5 = {"name": "⭐ Top 1 Sempre Atualizado ⭐", "length": 90, "price": 3700}  
-
-
-# Definição dos planos de Down e Order
-
-# DOWNSELL
-plano1DESC = {"name": "❤️‍🔥 Acesso Privê ❤️‍🔥", "length": 10, "price": 956}  
-plano2DESC = {"name": "❤️‍🔥 Acesso Proibido  ❤️‍🔥", "length": 60, "price": 1556}  
-plano3DESC = {"name": "❤️‍🔥 Acesso Total ❤️‍🔥", "length": 90, "price": 1956}  
-plano4DESC = {"name": "❤️‍🔥 Acesso Pro+ ❤️‍🔥", "length": 90, "price": 2756} 
+PUSHINPAY_TOKEN = "23986|p5LTvUmeDKXz6u5xbBEttm3ux4Ut9knZTys8pEqj430ffb7a" # 
+groupId = "-1002382215644"
 
 
 
-# UPSELL
-pack1 = {"name": "❤️‍🔥 Acesso Rápido ❤️‍🔥", "length": 10, "price": 2290} 
-pack2 = {"name": "❤️‍🔥 Desbloquear Conteúdo ❤️‍🔥", "length": 10, "price": 2790}
-pack3 = {"name": "❤️‍🔥 Acesso Premium ❤️‍🔥", "length": 10, "price": 3490}
-pack4 = {"name": "❤️‍🔥 Acesso VIP Master ❤️‍🔥", "length": 10, "price": 4290}
-pack5 = {"name": "❤️‍🔥 Acesso Proibidão❤️‍🔥", "length": 10, "price": 5990}
- 
+# Definição dos planos
+# Definição dos planos, do maior para o menor
 
-# Orderbump
-order1 = {"name": "⭐ NOVINHAS +18 ⭐", "length": 10, "price": 1290} 
-order2 = {"name": "⭐ NAMORADO CORNO ⭐", "length": 10, "price": 1790}
-order3 = {"name": "⭐ AMARDOR REAL ⭐", "length": 10, "price": 2190}
-order4 = {"name": "⭐ CAMERA PRIVADA ⭐", "length": 10, "price": 2690}
+plano1 = {"name": "VITALÍCIO + BÔNUS 🌶️🔥", "length": None, "price": 3990}
+plano2 = {"name": "VIP - Vitalício 70% OFF", "length": None, "price": 1990}
+plano3 = {"name": "VIP - Mensal 45% OFF", "length": None, "price": 1490}
+plano4 = {"name": "VIP - Semanal 30% OFF", "length": None, "price": 990}
+
+
+# VIP - VITALÍCIO 70% OFF 🔥   34,90
+# VIP - 3 MESES 40% OFF  ❤️‍🔥  24,90
+# VIP - 15 DIAS 30% OFF 😈   19,90
+
+# Definição dos planos de Downsell
+plano1DESC = {"name": "👑 𝐕𝐈𝐓𝐀𝐋Í𝐂𝐈𝐎 + 𝐁𝐎𝐍𝐔𝐒 👑 ", "length": 10, "price": 2490}  # 10,89
+plano2DESC = {"name": "VIP - Vitalício 70% OFF ", "length": 60, "price": 1690}  # 13,89
+plano3DESC = {"name": "VIP - Mensal 45% OFF", "length": 90, "price": 1290}  #18,89
+
+
+
+# Definição dos planos de OrderBump (incluindo os vídeos)
+Orderbump1 = {"name": "VIP - 15 DIAS  😈", "length": 10, "price": 1498, "video": "video1.mp4"}
+Orderbump2 = {"name": "VIP 3 MESES ❤‍🔥 40% OFF", "length": 60, "price": 1498, "video": "video2.mp4"}
+Orderbump3 = {"name": "VITALÍCIO 70% OFF🔥", "length": 90, "price": 2498, "video": "video3.mp4"}
+
+
+
+# Definição dos Planos de UPSELL
+pack1 = {"name": "💫 VIP SEM CENSURA 💫", "length": 10, "price": 799} 
+pack2 = {"name": "💫 70 VIDEOS LONGOS 💫", "length": 10, "price": 1499}
+pack3 = {"name": "💫 200 MÍDIAS 💫", "length": 10, "price": 2399}
 
 
 # VAZADOS --- VAZADOS ----- VAZADOS --- VAZADOS ----- VAZADOS --- VAZADOS ----- VAZADOS --- VAZADOS ----- VAZADOS --- VAZADOS -----

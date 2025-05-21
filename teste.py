@@ -72,4 +72,4 @@ def vendas():
     return render_template('vendas.html', vendas=vendas_data)
 
 if __name__ == '__main__':
-    app.run(debug=True, port="5003")
+    app.run(debug=True, port="5033")

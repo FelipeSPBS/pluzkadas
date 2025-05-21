@@ -5,7 +5,7 @@ from telebot import types
 import threading
 import uuid
 import requests
-from constants import APIkey, groupId, plano1, plano2, plano3, plano4, PUSHINPAY_TOKEN, plano1DESC, plano2DESC, plano3DESC, plano4DESC, pack1,pack2,pack3, pack4,pack5 ,plano5, order1, order2, order3, order4
+from constants import APIkey, groupId, plano1, plano2, plano3, PUSHINPAY_TOKEN, plano1DESC, plano2DESC, plano3DESC, pack1,pack2,pack3
 from flask import Flask, render_template
 
 # Inicializa o bot
@@ -14,7 +14,7 @@ bot = telebot.TeleBot(APIkey)
 # Função para conexão com o PostgreSQL
 def db_connection():
     return psycopg2.connect(
-        dbname="pluzk2",  # Substitua pelo nome do seu banco de dados
+        dbname="upsell",  # Substitua pelo nome do seu banco de dados
         user="postgres",   # Substitua pelo seu usuário
         password="hd1450", # Substitua pela sua senha
         host="localhost",  # Ou o endereço do seu servidor
@@ -29,7 +29,7 @@ def create_table():
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS users (
                 user_id TEXT PRIMARY KEY,
-                chat_id BIGINT,
+                chat_id INTEGER,
                 nome TEXT,
                 txid TEXT,
                 expires INTEGER,
@@ -92,8 +92,7 @@ def genPixLinkNormal(value, uid):
 
 # Gera o link de convite
 def generate_invite_link():
-    return "https://typebot.co/nayara-vip-1-mp6t2rw"  # Altere pelo seu link real
-
+    return "https://typebot.co/nayaraavipp"  # Altere pelo seu link real
 
 
 # Método para lidar com o comando Start
@@ -102,7 +101,7 @@ def start(msg):
     user_id = str(msg.from_user.id)
     first_name = str(msg.from_user.first_name)
     chat_id = msg.chat.id
-    planoBarato = plano1['price'] / 100
+
     print(f"User ID: {user_id}, Chat ID: {chat_id}, First Name: {first_name}")
 
     
@@ -126,45 +125,27 @@ def start(msg):
     welcome_user(chat_id)
 
     bot.send_message(chat_id, 
-                            "🇧🇷 𝗔𝗖𝗘𝗦𝗦𝗘 𝗢 𝗖𝗟𝗨𝗕𝗘 BRASIL FAMOSAS 🇧🇷\n\n"
-                            "𝗧𝗲𝗺𝗼𝘀 𝗰𝗼𝗻𝘁𝗲𝘂𝗱𝗼𝘀 𝗱𝗲 𝗺𝗮𝗶𝘀 𝗱𝗲 𝟮𝟱 𝗽𝗹𝗮𝘁𝗮𝗳𝗼𝗿𝗺𝗮𝘀 𝗮𝗱𝘂𝗹𝘁𝗮𝘀 ⤵️\n\n"
-                            "⭐️ 𝙊𝙣𝙡𝙮𝙁𝙖𝙣𝙨 / 𝙋𝙧𝙞𝙫𝙖𝙘𝙮 / 𝘾𝙡𝙤𝙨𝙚 𝙁𝙖𝙣𝙨 / 𝙋𝙖𝙩𝙧𝙚𝙤𝙣 / 𝙓𝙫𝙞𝙙𝙚𝙤𝙨 𝙍𝙚𝙙\n"
-                            "⭐️ 𝙁𝙖𝙢𝙤𝙨𝙖𝙨 𝙚 𝙈𝙤𝙙𝙚𝙡𝙤𝙨 𝘽𝙧𝙖𝙨𝙞𝙡𝙚𝙞𝙧𝙖𝙨 𝙑𝙖𝙯𝙖𝙙𝙖𝙨\n"
-                            "⭐️ 𝙄𝙣𝙨𝙩𝙖𝙜𝙧4𝙢 𝙚 𝙏𝙞𝙠𝙩𝙤𝙠𝙚𝙧𝙨 +18\n\n"
-                            "🤩 𝘿𝙚𝙨𝙛𝙧𝙪𝙩𝙚 𝙙𝙚 𝙩𝙤𝙙𝙤 𝙘𝙤𝙣𝙩𝙚𝙪𝙙𝙤 𝙙𝙖 𝙨𝙪𝙖 𝙢𝙤𝙙𝙚𝙡𝙤 𝙥𝙧𝙚𝙛𝙚𝙧𝙞𝙙𝙖 🤩\n\n"
-                            "⭐️ 𝘿𝙖𝙣ç𝙖𝙧𝙞𝙣𝙖 𝙙𝙤 𝙁𝙖𝙪𝙨𝙩ã𝙤 / 𝙋𝙖𝙣𝙞𝙘𝙖𝙩 𝙙𝙤 𝙋𝙖𝙣𝙞𝙘𝙤 𝙣𝙖 𝘽𝙖𝙣𝙙\n"
-                            "⭐️ 𝘽𝙧𝙖𝙨𝙞𝙡𝙚𝙞𝙧𝙞𝙣𝙝𝙖𝙨 / 𝙈𝙖𝙣𝙨ã𝙤 𝙈𝙖𝙧𝙤𝙢𝙗𝙖\n"
-                            "⭐️ 𝘾𝙡𝙤𝙨𝙚 𝙁𝙧𝙞𝙚𝙣𝙙𝙨 100% 𝙇𝙞𝙗𝙚𝙧𝙖𝙙𝙤\n\n"
-                            "✅ 𝙊𝙧𝙜𝙖𝙣𝙞𝙯𝙖𝙙𝙤 𝙥𝙤𝙧 𝙣𝙤𝙢𝙚𝙨 𝙘𝙤𝙢 𝙡𝙞𝙨𝙩𝙖\n"
-                            "✅ 𝙀𝙘𝙤𝙣𝙤𝙢𝙞𝙯𝙚 𝙩𝙚𝙢𝙥𝙤 𝙚 𝙙𝙞𝙣𝙝𝙚𝙞𝙧𝙤\n\n"
-                            "❌𝙋𝙖𝙧𝙚 𝙙𝙚 𝙥𝙚𝙧𝙙𝙚𝙧 𝙙𝙞𝙣𝙝𝙚𝙞𝙧𝙤 𝙘𝙤𝙢 𝙫𝙞𝙥𝙨 𝙧𝙪𝙞𝙣𝙨❌\n\n"
-                            "🥇 𝗘𝗡𝗧𝗥𝗘 𝗡𝗢 𝗠𝗘𝗟𝗛𝗢𝗥 𝗗𝗢 𝗕𝗥𝗔𝗦𝗜𝗟 ⤵️",
-                    reply_markup=choosePlan()  # Alterado para enviar diretamente os planos
-                            )
+                    "Oiê, amor! Olha o que aguarda você ⤵️💖\n\n"
+                    "🫦 Tudo aquilo que não posso compartilhar em nenhum outro lugar!\n"
+                    "🎬 Tenha acesso aos meus vídeos mais safados... 😏🔥\n\n"
+                    "💎 (+500 MÍDIAS DO MEU ONLYFANS)\n"
+                    "💎 (VÍDEOS COM AMIGUINHAS)\n"
+                    "💎 (INCESTO COM PRIMO E TIO)\n"
+                    "🚨 SORTEIOS DIÁRIOS PARA GRAVAR COMIGO!\n\n"
+                    "O que você precisa para se divertir do jeito que quer é um clique e uma única atitude... \n"
+                    "Te espero no meu privado! 🙈👇🏻",
+                     reply_markup=showPlansButton()
+                    )
 
-
-def ShowOrder():
-    markup = types.InlineKeyboardMarkup()
-    markup.row_width = 1
-    markup.add(
-        types.InlineKeyboardButton(f"{order1['name']} - R$ {order1['price'] / 100:.2f}", callback_data=f"{order1['price']}-promo"),
-        types.InlineKeyboardButton(f"{order2['name']} - R$ {order2['price'] / 100:.2f}", callback_data=f"{order2['price']}-promo"),
-        types.InlineKeyboardButton(f"{order3['name']} - R$ {order3['price'] / 100:.2f}", callback_data=f"{order3['price']}-promo"),
-        types.InlineKeyboardButton(f"{order4['name']} - R$ {order4['price'] / 100:.2f}", callback_data=f"{order4['price']}-promo"),
-    )
-    return markup
 
 # Função para mostrar planos promocionais
 def showPromotionPlansButton():
     markup = types.InlineKeyboardMarkup()
     markup.row_width = 1
     markup.add(
-        
         types.InlineKeyboardButton(f"{plano1DESC['name']} - R$ {plano1DESC['price'] / 100:.2f}", callback_data=f"{plano1DESC['price']}-promo"),
         types.InlineKeyboardButton(f"{plano2DESC['name']} - R$ {plano2DESC['price'] / 100:.2f}", callback_data=f"{plano2DESC['price']}-promo"),
         types.InlineKeyboardButton(f"{plano3DESC['name']} - R$ {plano3DESC['price'] / 100:.2f}", callback_data=f"{plano3DESC['price']}-promo"),
-        types.InlineKeyboardButton(f"{plano4DESC['name']} - R$ {plano4DESC['price'] / 100:.2f}", callback_data=f"{plano4DESC['price']}-promo"),
-        
         
     )
     return markup
@@ -226,8 +207,7 @@ def choosePlan():
         types.InlineKeyboardButton(f"    {plano1['name']} - R$ {plano1['price'] / 100:.2f}    ", callback_data=f"{plano1['price']}-plan"),
         types.InlineKeyboardButton(f"    {plano2['name']} - R$ {plano2['price'] / 100:.2f}    ", callback_data=f"{plano2['price']}-plan"),
         types.InlineKeyboardButton(f"    {plano3['name']} - R$ {plano3['price'] / 100:.2f}    ", callback_data=f"{plano3['price']}-plan"),
-        types.InlineKeyboardButton(f"    {plano4['name']} - R$ {plano4['price'] / 100:.2f}    ", callback_data=f"{plano4['price']}-plan"),
-       
+        
     )
     return markup
 
@@ -283,38 +263,15 @@ def follow_up_payment_check(chat_id, txid):
         else:
             bot.send_message(
                 chat_id,
-                " 👀 Curioso pra ver tudo que eu posso te mostar?😈 \n\n"
-                "Então vem... porque com só R$ 7,98 você entra no meu mundo sem limites.💸 Pagamento único — sem mensalidades, sem enrolação.\n\n"
-
-                "E olha o que te espera lá dentro... 👇\n\n"
-
-                "✅ Novinhas 18+\n"
-                "✅ Corninhos safados\n"
-                "✅ Virgens bem comportadas (ou nem tanto...)\n"
-                "✅ Novinhas 18+\n"
-                "✅ Lésbicas apaixonadas\n"
-                "✅ Gordinhas gostosas\n"
-                
-
-                "✅ Vazadas reais\n"
-                "✅ Flagras & Câmeras Escondidas\n"
-                "✅ Trans maravilhosas\n"
-                "✅ Orgias\n"
-                "✅ GangBang pesado\n"
-                "✅ Coroas experientes\n"
-                "✅ Famosas deliciosas\n"
-
-                "✅ Squirts 💦 (Bônus)\n"
-                "✅ Caiu na Net 👀 (Bônus)s\n"
-                "✅ Público sem pudor (Bônus)\n"
-                "✅ Sexo em Público (Bônus)\n"
-                "✅ +8 Canais Bônus só pra você\n\n"
-
-
-                "🔁 Atualizações todos os dias\n"
-                "🛡️ Compra 100% Segura\n"
-                "👨‍💻 Suporte 24H\n"
-                "⚡ Acesso Instantâneo\n", 
+                " *Poxa gatinho, você me deixou esperando... Mas vamos fazer assim, eu vou te dar um descontinho em qualquer plano que você quiser!* \n\n"
+                "🔥 [PAGUE COM PIX E RECEBA O CONTÉUDO NA HORA] 🔥\n\n"
+                "🎁 *10 grupos exclusivos!*\n"
+                "👩‍❤️‍💋‍👩 *Millfs*\n"
+                "👙 *Peitudas*\n"
+                "🍑 *Gordinhas*\n"
+                "...e muito mais!\n\n"
+                "🔥 *Garanta agora seu acesso e aproveite TUDO!* 🔥\n\n"
+                "💎 *+500 MÍDIAS DO MEU ONLYFANS*\n", 
                 parse_mode="Markdown", 
                 reply_markup=promotion_markup  # Mantendo o teclado promocional, se necessário
             )
@@ -332,8 +289,8 @@ def daysToSeconds(days):
 def welcome_user(chat_id):
 
     # Enviando a imagem
-    with open("pluzkada.mp4", "rb") as video:
-        bot.send_video(chat_id, video)
+    with open("apresenta-Cliente02.jpg", "rb") as media:
+        bot.send_video(chat_id, media)
 
 def videozin(chat_id):
     with open("Donwsell-Cliente01.mp4", "rb") as video:
@@ -487,8 +444,6 @@ def ShowPacksPlans():
         types.InlineKeyboardButton(f"{pack1['name']} - R$ {pack1['price'] / 100:.2f}", callback_data=f"{pack1['price']}-promo"),
         types.InlineKeyboardButton(f"{pack2['name']} - R$ {pack2['price'] / 100:.2f}", callback_data=f"{pack2['price']}-promo"),
         types.InlineKeyboardButton(f"{pack3['name']} - R$ {pack3['price'] / 100:.2f}", callback_data=f"{pack3['price']}-promo"),
-        types.InlineKeyboardButton(f"{pack4['name']} - R$ {pack4['price'] / 100:.2f}", callback_data=f"{pack4['price']}-promo"),
-        types.InlineKeyboardButton(f"{pack5['name']} - R$ {pack5['price'] / 100:.2f}", callback_data=f"{pack5['price']}-promo"),
       
     )
     return markup
@@ -501,23 +456,15 @@ def handle_proposal(msg):
 
 def send_proposal(chat_id, first_name):
     message = (
-
-"💌 ACESSO VIP LIBERADO (por tempo limitado)\n\n"
-
-"Existe um pacote especial com conteúdos que não estão disponíveis no grupo aberto.\n"
-"É exclusivo pra quem quer ver o que realmente vale a pena.\n\n"
-
-"🔓 O que tá incluso:\n\n"
-
-"✅ Vazados nunca postados no grupo\n"
-"✅ Conteúdos organizados e atualizados direto no privado\n"
-"✅ Canal secreto com acesso instantâneo\n"
-"✅ Extras exclusivos só pra quem tem o VIP 😈\n\n"
-
-"💸 Planos a partir de R$ 7,99\n"
-"⏳ Disponível por tempo limitado. Depois, o acesso é fechado sem aviso.\n\n"
-
-"Escolha seu nível de acesso e desbloqueie tudo agora.\n"
+        f"Oiee, {first_name}! Tudo bem? 😘\n\n"  # Inclui o nome do usuário
+        "Que bom ter você no meu GRUPINHO DE PRÉVIAS 🔞! Eu chamei você aqui para te fazer uma proposta ☺️ "
+        "Tenho um pacote exclusivo que eu não mando no VIP, mas posso mandar pra você....😈🔥\n\n"
+        "Você vai ter acesso:\n\n"
+        "💎 VÍDEOS SECRETOS 💎\n"
+        "💎 PRESENTE NO PRIVADO 💎\n"
+        "🔥 MEU WHATSAPP PESSOAL 🔥\n\n"
+        "TUDO POR R$ 14,99\n\n"
+        "Ou vai me deixar sozinha… aguardo sua resposta ☺️👇"
     )
 
     bot.send_message(chat_id, message, reply_markup=ShowPacksPlans())
@@ -682,67 +629,22 @@ def has_interacted(chat_id):
 
 
 
-@bot.message_handler(commands=['order'])  # Comando para enviar a proposta
-def handle_order(msg):
-    chat_id = msg.chat.id
-    sendPromo(chat_id)
-
-
 def sendPromo(chat_id):
     print(f"Enviando promoções para {chat_id}...")
-    promotion_markup = ShowOrder()
+    promotion_markup = showPromotionPlansButton()
 
     try:
-        markup = types.InlineKeyboardMarkup()
-        markup.row_width = 1
+        videozin(chat_id)
         bot.send_message(
             chat_id,
-            "🔥😈 ACESSO VIP AO MELHOR CONTEÚDO +18! 🔥\n"
-            "Desbloqueie milhares de vídeos vazados, completos e atualizados todos os dias!\n\n"
-
-            "💸 Planos a partir de R$ 7,98 – pagamento único, sem mensalidades!\n\n"
-
-            "Você encontra:"
-            "✅ Novinhas, lésbicas, trans, cornos, gordinhas, virgens\n"
-            "✅ Vazadas, flagras reais, celebridades, maduras, orgias e mais\n"
-            "🎁 Bônus: Caiu na net, público, squirts e +8 canais secretos\n\n"
-
-            "⚡️ Acesso instantâneo\n"
-            "📅 Atualizações diárias\n"
-            "🔒 100% seguro e discreto\n"
-            "👨‍💻 Suporte 24h\n\n"
-
-            "📌 Pague uma vez e tenha acesso vitalício!\n"
-            "🤤😈 Você irá pagar apenas uma vez para ter acesso ao VIP para sempre com atualizações diárias.\n",
+            "🎉 Oferta Imperdível! 🎉\n\n"
+            "Quer conhecer ou voltar a aproveitar nossas ofertas especiais? 🔥\n"
+            "Escolha um dos planos promocionais abaixo e desbloqueie o seu acesso! ⬇️",
             reply_markup=promotion_markup
         )
         print(f"Promoção enviada para {chat_id}.")  # Log de sucesso
-    except telebot.apihelper.ApiTelegramException as e:
-        if "blocked" in str(e):  # Checa se o motivo do erro é bloqueado
-            print(f"Usuário {chat_id} bloqueou o bot. Pulando...")
-        else:
-            print(f"Erro ao enviar promoções para {chat_id}: {e}")
-
-
-
-def send_proposal(chat_id, first_name):
-    message = (
-
-        "💌 Ei... posso te contar um segredo? "
-        "Você tá aqui no grupinho, mas nem imagina o que eu guardei só pra quem realmente merece 😈\n\n"
-        "📦 Preparei um pacote VIP EXCLUSIVO, que não vai pra ninguém do grupo… só pra quem fechar comigo agora.\n\n"
-        "Olha o que você recebe:\n\n"
-
-        "✅ Conteúdos secretos (nunca postados antes)\n"
-        "✅ Presente íntimo direto no privado\n"
-        "✅ Meu WhatsApp pessoal – só os especiais têm 💋\n\n"
-
-        "💸 Por tão pouco assim? A partir de R$ 7,99... e o prazer é todo seu.(É sério. Depois não diz que eu não avisei…)\n\n"
-        "⏳ Válido só pra hoje. Me chama antes que eu feche essa porta."
-    )
-
-    bot.send_message(chat_id, message, reply_markup=ShowPacksPlans())
-    print(f'Upsell enviado corretamente')
+    except Exception as e:
+        print(f"Erro ao enviar promoções para {chat_id}: {e}")
 
 def PROMO():
     while True:
@@ -772,20 +674,16 @@ def PROMO():
 
 
 if __name__ == '__main__':
-    print("Iniciando o bot...")
+    # Inicia a thread para banir usuários não autorizados e expirados
+    # kicker = threading.Thread(target=kickPeople)
+    # kicker.start()
 
-    # Inicia a thread para programar as promoções, se necessário
-    promo_scheduler = threading.Thread(target=PROMO)
-    promo_scheduler.start()
+    # Inicia a thread para enviar promoções
+    promo_sender = threading.Thread(target=PROMO)
+    promo_sender.start()
 
     # Inicia o polling do bot para receber mensagens e interações
-    while True:
-        try:
-            print("Bot em execução...")
-            bot.polling(none_stop=True)
-        except Exception as e:
-            print(f"Erro ao executar o bot: {e}. Reiniciando...")
-            time.sleep(5)  # Espera um pouco antes de reiniciar
+    bot.polling(none_stop=True)
 
 
 
