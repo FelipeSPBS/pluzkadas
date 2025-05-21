@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Resultado da Verificação</title>
+</head>
+<body>
+    <h1>Resultado da Verificação</h1>
+    {% if transaction.status == 'paid' %}
+        <h2>Status: Pago</h2>
+        <p>Valor: R$ {{ transaction.value }}</p>
+        <p>Descrição: {{ transaction.description }}</p>
+        <p>Payer Name: {{ transaction.payer_name }}</p>
+    {% else %}
+        <h2>Status: Não encontrado ou não pago</h2>
+    {% endif %}
+    <a href="/vendas">Voltar à lista de vendas</a>
+</body>
+</html>
